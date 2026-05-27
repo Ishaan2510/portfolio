@@ -14,12 +14,12 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Ishaan Goswami / Backend & Systems Engineer",
+  title: "Ishaan Goswami",
   description:
     "Third-year CS undergraduate building distributed backend systems, LLM orchestration, and container-native deployments.",
   metadataBase: new URL("https://ishaan.dev"),
   openGraph: {
-    title: "Ishaan Goswami / Backend & Systems Engineer",
+    title: "Ishaan Goswami",
     description:
       "Distributed systems, LLM orchestration, GitOps. Python, Node.js, Kubernetes, Argo CD.",
     type: "website",

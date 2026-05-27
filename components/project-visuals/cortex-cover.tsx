@@ -1,184 +1,163 @@
 "use client";
 
-// Architectural illustration for Cortex.
-// Shows the task-aware routing layer: input → router → provider chain with fallback.
-// Designed to feel like an editorial systems diagram, not a generic graphic.
-
+/**
+ * Cortex cover — atmospheric, not schematic.
+ * Multiple soft gradient orbs (each LLM provider) drift inward toward a
+ * bright convergence point representing the router. Painterly, not technical.
+ */
 export function CortexCover() {
   return (
     <svg
-      viewBox="0 0 800 500"
+      viewBox="0 0 800 600"
       xmlns="http://www.w3.org/2000/svg"
-      className="block h-full w-full cover-hover"
+      className="block h-full w-full"
       preserveAspectRatio="xMidYMid slice"
-      aria-label="Cortex architecture: task-aware LLM routing across four providers"
+      aria-label="Cortex — task-aware LLM routing across four providers"
     >
-      {/* Background gradient */}
       <defs>
-        <linearGradient id="cortex-bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#1a1b22" />
-          <stop offset="100%" stopColor="#0e0f13" />
-        </linearGradient>
-        <linearGradient id="cortex-pulse" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#ff3d2e" stopOpacity="0" />
-          <stop offset="50%" stopColor="#ff3d2e" stopOpacity="0.6" />
+        {/* Deep base */}
+        <radialGradient id="cx-bg" cx="0.5" cy="0.5" r="0.7">
+          <stop offset="0%" stopColor="#16121c" />
+          <stop offset="100%" stopColor="#08070b" />
+        </radialGradient>
+
+        {/* Provider orbs — each with its own emotional tone */}
+        <radialGradient id="cx-groq" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#ff3d2e" stopOpacity="0.85" />
+          <stop offset="40%" stopColor="#ff3d2e" stopOpacity="0.3" />
           <stop offset="100%" stopColor="#ff3d2e" stopOpacity="0" />
-        </linearGradient>
+        </radialGradient>
+        <radialGradient id="cx-cerebras" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#7c4dff" stopOpacity="0.65" />
+          <stop offset="100%" stopColor="#7c4dff" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="cx-gemini" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#4dd4ff" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#4dd4ff" stopOpacity="0" />
+        </radialGradient>
+        <radialGradient id="cx-openrouter" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#ffc857" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#ffc857" stopOpacity="0" />
+        </radialGradient>
+
+        {/* Bright convergence core */}
+        <radialGradient id="cx-core" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="30%" stopColor="#ffe9e6" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+        </radialGradient>
+
+        {/* Subtle grain */}
+        <filter id="cx-grain">
+          <feTurbulence baseFrequency="0.9" numOctaves="2" />
+          <feColorMatrix
+            values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0"
+          />
+        </filter>
       </defs>
-      <rect width="800" height="500" fill="url(#cortex-bg)" />
 
-      {/* Subtle grid */}
-      <g stroke="#1c1d22" strokeWidth="1" opacity="0.6">
-        {Array.from({ length: 10 }).map((_, i) => (
-          <line key={`v-${i}`} x1={i * 80} y1="0" x2={i * 80} y2="500" />
-        ))}
-        {Array.from({ length: 7 }).map((_, i) => (
-          <line key={`h-${i}`} x1="0" y1={i * 80} x2="800" y2={i * 80} />
-        ))}
-      </g>
+      {/* Base */}
+      <rect width="800" height="600" fill="url(#cx-bg)" />
 
-      {/* Input node — left */}
-      <g transform="translate(60, 230)">
-        <rect width="140" height="40" rx="2" fill="#16171b" stroke="#2a2c33" />
-        <text
-          x="70"
-          y="25"
-          textAnchor="middle"
-          fontFamily="ui-monospace, monospace"
-          fontSize="11"
-          fill="#a8a8a3"
-          letterSpacing="2"
-        >
-          INPUT / TASK
-        </text>
-      </g>
-
-      {/* Router node — center, slightly emphasized */}
-      <g transform="translate(330, 215)">
-        <rect width="140" height="70" rx="2" fill="#16171b" stroke="#ff3d2e" strokeWidth="1" />
-        <text
-          x="70"
-          y="30"
-          textAnchor="middle"
-          fontFamily="ui-monospace, monospace"
-          fontSize="11"
-          fill="#ff3d2e"
-          letterSpacing="2"
-        >
-          ROUTER
-        </text>
-        <text
-          x="70"
-          y="50"
-          textAnchor="middle"
-          fontFamily="ui-monospace, monospace"
-          fontSize="9"
-          fill="#5a5a57"
-          letterSpacing="1.5"
-        >
-          /task-aware
-        </text>
-      </g>
-
-      {/* Provider nodes — right column, stacked */}
-      {[
-        { label: "GROQ", y: 90, primary: true },
-        { label: "CEREBRAS", y: 175, primary: false },
-        { label: "GEMINI", y: 260, primary: false },
-        { label: "OPENROUTER", y: 345, primary: false },
-      ].map((p) => (
-        <g key={p.label} transform={`translate(600, ${p.y})`}>
-          <rect
-            width="140"
-            height="40"
-            rx="2"
-            fill="#16171b"
-            stroke={p.primary ? "#f5f5f4" : "#2a2c33"}
+      {/* Orbs in motion — slow drift so the surface feels alive */}
+      <g style={{ filter: "blur(1px)" }}>
+        <circle cx="180" cy="160" r="200" fill="url(#cx-groq)">
+          <animate
+            attributeName="cx"
+            values="180;200;180"
+            dur="14s"
+            repeatCount="indefinite"
           />
-          <text
-            x="70"
-            y="25"
-            textAnchor="middle"
-            fontFamily="ui-monospace, monospace"
-            fontSize="11"
-            fill={p.primary ? "#f5f5f4" : "#a8a8a3"}
-            letterSpacing="2"
-          >
-            {p.label}
-          </text>
-          {/* Status dot */}
-          <circle
-            cx="125"
-            cy="20"
-            r="2"
-            fill={p.primary ? "#4ade80" : "#5a5a57"}
+          <animate
+            attributeName="cy"
+            values="160;180;160"
+            dur="11s"
+            repeatCount="indefinite"
           />
-        </g>
-      ))}
+        </circle>
+        <circle cx="620" cy="180" r="170" fill="url(#cx-cerebras)">
+          <animate
+            attributeName="cx"
+            values="620;600;620"
+            dur="16s"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="cy"
+            values="180;200;180"
+            dur="13s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="170" cy="440" r="180" fill="url(#cx-gemini)">
+          <animate
+            attributeName="cx"
+            values="170;190;170"
+            dur="13s"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="640" cy="440" r="160" fill="url(#cx-openrouter)">
+          <animate
+            attributeName="cy"
+            values="440;420;440"
+            dur="15s"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </g>
 
-      {/* Connection lines: input → router */}
-      <line x1="200" y1="250" x2="330" y2="250" stroke="#2a2c33" strokeWidth="1" />
-
-      {/* Connection lines: router → providers */}
-      {[110, 195, 280, 365].map((y, i) => (
-        <path
-          key={i}
-          d={`M 470 250 L 535 250 L 535 ${y} L 600 ${y}`}
-          stroke={i === 0 ? "#ff3d2e" : "#2a2c33"}
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray={i === 0 ? "0" : "3 3"}
-          opacity={i === 0 ? 0.9 : 0.5}
-        />
-      ))}
-
-      {/* Animated pulse along the primary path */}
-      <rect x="470" y="249.5" width="65" height="1" fill="url(#cortex-pulse)">
+      {/* The convergence — a bright pulse at the center */}
+      <circle cx="400" cy="300" r="120" fill="url(#cx-core)">
         <animate
-          attributeName="x"
-          values="200;540"
-          dur="2.5s"
+          attributeName="r"
+          values="110;135;110"
+          dur="4s"
           repeatCount="indefinite"
         />
-      </rect>
+        <animate
+          attributeName="opacity"
+          values="0.85;1;0.85"
+          dur="4s"
+          repeatCount="indefinite"
+        />
+      </circle>
 
-      {/* Top-right caption */}
-      <g>
-        <text
-          x="740"
-          y="40"
-          textAnchor="end"
-          fontFamily="ui-monospace, monospace"
-          fontSize="10"
-          fill="#5a5a57"
-          letterSpacing="2"
-        >
-          ARCH / 01
-        </text>
-        <text
-          x="740"
-          y="58"
-          textAnchor="end"
-          fontFamily="ui-monospace, monospace"
-          fontSize="10"
-          fill="#a8a8a3"
-          letterSpacing="2"
-        >
-          MULTI-PROVIDER ROUTING
-        </text>
+      {/* Hairline structure — barely visible directional lines */}
+      <g stroke="rgba(255,255,255,0.04)" strokeWidth="1" fill="none">
+        <line x1="180" y1="160" x2="400" y2="300" />
+        <line x1="620" y1="180" x2="400" y2="300" />
+        <line x1="170" y1="440" x2="400" y2="300" />
+        <line x1="640" y1="440" x2="400" y2="300" />
       </g>
 
-      {/* Bottom-left caption */}
-      <g>
+      {/* Grain overlay */}
+      <rect
+        width="800"
+        height="600"
+        filter="url(#cx-grain)"
+        opacity="0.6"
+      />
+
+      {/* Editorial caption */}
+      <g
+        fontFamily="ui-monospace, monospace"
+        fontSize="10"
+        letterSpacing="2"
+      >
+        <text x="32" y="40" fill="#a8a8a3">
+          CORTEX / ROUTING
+        </text>
+        <text x="32" y="58" fill="#5a5a57">
+          FOUR PROVIDERS · ONE INTENT
+        </text>
         <text
-          x="60"
-          y="460"
-          fontFamily="ui-monospace, monospace"
-          fontSize="10"
+          x="768"
+          y="572"
+          textAnchor="end"
           fill="#5a5a57"
-          letterSpacing="2"
         >
-          FALLBACK CHAIN · RATE-LIMIT-AWARE
+          01 — 2026
         </text>
       </g>
     </svg>

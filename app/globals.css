@@ -2,25 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* Surface — slightly warmer than pure black, easier on the eyes for editorial reading */
-  --bg: #0a0a0b;
-  --surface: #111114;
-  --surface-2: #16171b;
-  --border: #1c1d22;
-  --border-bright: #2a2c33;
+/* ─────────────────────────────────────────────────────────────── */
+/* PALETTE — Cobalt & Lemon                                        */
+/* Dark default; light via [data-theme="light"]                    */
+/* ─────────────────────────────────────────────────────────────── */
 
-  /* Foreground */
-  --fg: #f5f5f4;
-  --fg-muted: #a8a8a3;
-  --fg-dim: #5a5a57;
+:root,
+:root[data-theme="dark"] {
+  --bg: #0a0f1e;
+  --surface: #0f1628;
+  --surface-2: #161e34;
+  --border: #1c2540;
+  --border-bright: #2a3556;
 
-  /* Accent — kept but used more sparingly in this editorial revision */
-  --accent: #ff3d2e;
-  --accent-glow: rgba(255, 61, 46, 0.18);
-  --data: #00e5ff;
-  --ok: #4ade80;
-  --warn: #fbbf24;
+  --fg: #f0f3fa;
+  --fg-muted: #9aa3bd;
+  --fg-dim: #565f7d;
+
+  --accent: #3d6cff;
+  --accent-glow: rgba(61, 108, 255, 0.25);
+  --accent-2: #f6ec74;
+  --accent-2-glow: rgba(246, 236, 116, 0.18);
+
+  --orb-warm: rgba(246, 236, 116, 0.16);
+  --orb-cool: rgba(61, 108, 255, 0.38);
+  --orb-deep: rgba(76, 50, 220, 0.30);
+
+  --ok: #5dd6a0;
+  --warn: #f6ec74;
+  --danger: #ff6b5e;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5f3ee;
+  --surface: #ebe8e0;
+  --surface-2: #e0ddd2;
+  --border: #d4cfc1;
+  --border-bright: #b8b0a0;
+
+  --fg: #0c1226;
+  --fg-muted: #4a527a;
+  --fg-dim: #8087a8;
+
+  --accent: #2a4fdd;
+  --accent-glow: rgba(42, 79, 221, 0.18);
+  --accent-2: #c4a300;
+  --accent-2-glow: rgba(196, 163, 0, 0.18);
+
+  --orb-warm: rgba(196, 163, 0, 0.18);
+  --orb-cool: rgba(42, 79, 221, 0.28);
+  --orb-deep: rgba(70, 50, 180, 0.18);
+
+  --ok: #1d8a5b;
+  --warn: #a07d00;
+  --danger: #c44032;
 }
 
 * {
@@ -31,7 +66,6 @@
 html {
   background: var(--bg);
   color: var(--fg);
-  scroll-behavior: smooth;
 }
 
 body {
@@ -40,6 +74,11 @@ body {
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   font-feature-settings: "ss01", "cv11";
   overflow-x: hidden;
+  transition: background-color 400ms ease, color 400ms ease;
+}
+
+:where(section, article, aside, header, footer, nav, main, div) {
+  transition: background-color 400ms ease, border-color 400ms ease, color 250ms ease;
 }
 
 ::selection {
@@ -47,37 +86,29 @@ body {
   color: var(--bg);
 }
 
-/* Scrollbar — refined */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: var(--border-bright);
   border: 2px solid var(--bg);
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--fg-dim);
-}
+::-webkit-scrollbar-thumb:hover { background: var(--fg-dim); }
 
-/* Focus ring */
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
-/* Tabular numbers wherever data appears */
 .tabular {
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
 
-/* Editorial italic — alias for hero & emphasis moments */
 .editorial {
   font-family: var(--font-instrument), Georgia, serif;
   font-style: italic;
@@ -85,7 +116,14 @@ body {
   letter-spacing: -0.015em;
 }
 
-/* Subtle engineering grid — kept but lower opacity in editorial mode */
+.eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+
 .grid-bg {
   background-image:
     linear-gradient(to right, var(--border) 1px, transparent 1px),
@@ -95,21 +133,30 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 20%, transparent 80%);
 }
 
-/* Mask reveal — slower, more deliberate for editorial feel */
+@media (hover: hover) and (pointer: fine) {
+  body.cursor-custom,
+  body.cursor-custom a,
+  body.cursor-custom button,
+  body.cursor-custom [role="button"] {
+    cursor: none;
+  }
+}
+
 .mask-line {
   display: block;
   overflow: hidden;
 }
 
-/* Image hover for project covers */
-.cover-hover {
+.cover-card { position: relative; overflow: hidden; }
+.cover-card img,
+.cover-card svg {
   transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.cover-card:hover .cover-hover {
-  transform: scale(1.04);
+.cover-card:hover img,
+.cover-card:hover svg {
+  transform: scale(1.03);
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -121,7 +168,6 @@ body {
   }
 }
 
-/* Container — wider for editorial breathing */
 .shell {
   width: 100%;
   max-width: 1480px;
@@ -131,14 +177,17 @@ body {
   padding-right: 24px;
 }
 @media (min-width: 768px) {
-  .shell {
-    padding-left: 56px;
-    padding-right: 56px;
-  }
+  .shell { padding-left: 56px; padding-right: 56px; }
 }
 @media (min-width: 1280px) {
-  .shell {
-    padding-left: 80px;
-    padding-right: 80px;
-  }
+  .shell { padding-left: 80px; padding-right: 80px; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { formatISTTime } from "@/lib/utils";
 import { profile } from "@/lib/data";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function StatusBar() {
   const [time, setTime] = useState<string>("");
@@ -16,7 +17,6 @@ export function StatusBar() {
     return () => clearInterval(id);
   }, []);
 
-  // Pick the dot color based on availability state
   const dotColor =
     profile.status.state === "ok"
       ? "bg-ok"
@@ -26,8 +26,7 @@ export function StatusBar() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-40 border-b border-border bg-bg/80 backdrop-blur-md">
-      <div className="shell flex h-9 items-center justify-between font-mono text-[10px] uppercase tracking-ultra-wide text-fg-dim">
-        {/* Left: live status */}
+      <div className="shell flex h-9 items-center justify-between font-mono text-[10px] uppercase tracking-[0.22em] text-fg-dim">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5">
             <span className={`h-1.5 w-1.5 rounded-full ${dotColor} animate-pulse`} />
@@ -41,7 +40,6 @@ export function StatusBar() {
           </span>
         </div>
 
-        {/* Right: location + live clock */}
         <div className="flex items-center gap-3">
           <span className="hidden md:inline">
             <span className="text-fg-muted">Loc </span>
@@ -54,6 +52,8 @@ export function StatusBar() {
               {mounted ? time : "--:--:--"}
             </span>
           </span>
+          <span className="text-border-bright">·</span>
+          <ThemeToggle />
         </div>
       </div>
     </div>

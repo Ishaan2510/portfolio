@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Instrument_Serif } from "next/font/google";
+import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
 import "./globals.css";
 
-// Instrument Serif Italic — the editorial signature.
-// Used only on big moments: hero verbs, section headlines, key emphasis.
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   variable: "--font-instrument",
@@ -36,9 +35,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} ${instrumentSerif.variable}`}
     >
-      <body className="bg-bg text-fg font-sans antialiased">{children}</body>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+      </head>
+      <body className="bg-bg text-fg font-sans antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

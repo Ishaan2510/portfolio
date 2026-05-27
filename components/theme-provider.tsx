@@ -19,10 +19,10 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
 
   useEffect(() => {
-    const initial = (document.documentElement.dataset.theme as Theme) || "dark";
+    const initial = (document.documentElement.dataset.theme as Theme) || "light";
     setThemeState(initial);
   }, []);
 
@@ -49,10 +49,10 @@ export const themeInitScript = `
 (function() {
   try {
     var saved = localStorage.getItem('theme');
-    var theme = saved === 'light' || saved === 'dark' ? saved : 'dark';
+    var theme = saved === 'light' || saved === 'dark' ? saved : 'light';
     document.documentElement.dataset.theme = theme;
   } catch(e) {
-    document.documentElement.dataset.theme = 'dark';
+    document.documentElement.dataset.theme = 'light';
   }
 })();
 `;

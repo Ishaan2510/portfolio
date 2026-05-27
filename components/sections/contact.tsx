@@ -41,11 +41,6 @@ export function Contact() {
           </span>
         </h2>
 
-        <p className="mt-10 max-w-2xl text-base leading-relaxed text-fg-muted md:text-lg">
-          Currently interviewing for summer internships in backend, ML
-          platform, and full-stack roles. Available {profile.status.detail.toLowerCase()}. The fastest
-          way to reach me is email.
-        </p>
 
         <motion.a
           href={profile.links.email}

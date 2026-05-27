@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Surface — slightly warmer than pure black, easier on the eyes for editorial reading */
+  --bg: #0a0a0b;
+  --surface: #111114;
+  --surface-2: #16171b;
+  --border: #1c1d22;
+  --border-bright: #2a2c33;
+
+  /* Foreground */
+  --fg: #f5f5f4;
+  --fg-muted: #a8a8a3;
+  --fg-dim: #5a5a57;
+
+  /* Accent — kept but used more sparingly in this editorial revision */
+  --accent: #ff3d2e;
+  --accent-glow: rgba(255, 61, 46, 0.18);
+  --data: #00e5ff;
+  --ok: #4ade80;
+  --warn: #fbbf24;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Scrollbar — refined */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-bright);
+  border: 2px solid var(--bg);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-dim);
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Tabular numbers wherever data appears */
+.tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Editorial italic — alias for hero & emphasis moments */
+.editorial {
+  font-family: var(--font-instrument), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+/* Subtle engineering grid — kept but lower opacity in editorial mode */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black 20%, transparent 80%);
+}
+
+/* Mask reveal — slower, more deliberate for editorial feel */
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+
+/* Image hover for project covers */
+.cover-hover {
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cover-card:hover .cover-hover {
+  transform: scale(1.04);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Container — wider for editorial breathing */
+.shell {
+  width: 100%;
+  max-width: 1480px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media (min-width: 768px) {
+  .shell {
+    padding-left: 56px;
+    padding-right: 56px;
+  }
+}
+@media (min-width: 1280px) {
+  .shell {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}

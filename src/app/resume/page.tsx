@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Download, ExternalLink, FileText } from "lucide-react";
 import { CommandMenu } from "@/components/command-menu";
@@ -156,15 +155,27 @@ export default function ResumePage() {
         </div>
 
         <div className="relative aspect-[8.5/11] w-full overflow-hidden rounded-[6px] border border-black/10 bg-white shadow-sm dark:border-white/10">
-          <Image
-            src="/Ishaan-Goswami-Resume.png"
-            alt="Ishaan Goswami resume"
-            fill
-            preload
-            sizes="(min-width: 768px) 40vw, 100vw"
-            quality={75}
-            className="object-contain"
-          />
+          <object
+            data={`${resumePath}#toolbar=0&navpanes=0`}
+            type="application/pdf"
+            aria-label="Ishaan Goswami resume"
+            className="absolute inset-0 h-full w-full"
+          >
+            <div className="flex h-full w-full items-center justify-center p-6 text-center text-[13px] text-zinc-500 dark:text-zinc-400">
+              <span>
+                Preview unavailable in this browser.{" "}
+                <a
+                  href={resumePath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-zinc-900 dark:hover:text-zinc-100"
+                >
+                  Open the resume PDF
+                </a>
+                .
+              </span>
+            </div>
+          </object>
         </div>
 
         <div className="relative mt-8">

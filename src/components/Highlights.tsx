@@ -10,7 +10,7 @@ export function Highlights() {
         No trophies on the shelf yet.
       </p>
       <p className="max-w-[440px] text-[13px] text-zinc-500 dark:text-zinc-500 leading-relaxed mt-2">
-        I haven&apos;t arrived — but I&apos;m on the road to building something that
+        I haven&apos;t arrived to that destination yet, but I&apos;m on the road to building something that
         matters, one commit at a time. The best highlights are still ahead.
       </p>
     </div>

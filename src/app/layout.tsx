@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ashutoshx7",
+  title: "Ishaan Goswami",
   description:
-    "Full stack developer building clean, modern websites and apps with a focus on design, functionality, and attention to detail.",
+    "Full-stack engineer building distributed systems, LLM orchestration, and production observability tooling.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Ashutoshx7",
+    title: "Ishaan Goswami",
     description:
-      "Full stack developer building clean, modern websites and apps.",
+      "Full-stack engineer building distributed systems, LLM orchestration, and production observability tooling.",
     type: "website",
   },
 };

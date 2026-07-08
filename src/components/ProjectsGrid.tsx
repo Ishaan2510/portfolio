@@ -29,7 +29,6 @@ export {
 
 export const ProjectCard = ({
   project,
-  setActiveVideo,
   isPriority = false,
 }: {
   project: Project;
@@ -90,37 +89,6 @@ export const ProjectCard = ({
           }}
           transition={{ duration: 0.3, ease: "easeOut" }}
         />
-
-        <motion.h1
-          className="absolute top-4 left-4 text-[10px] font-bold text-zinc-500 dark:text-zinc-400 z-30 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]"
-          variants={{
-            rest: { left: "1rem", top: "1rem", x: "0%", color: "#71717a", opacity: 0 },
-            hover: { left: "50%", top: "25%", x: "-50%", color: "#ffffff", opacity: 1 },
-          }}
-          transition={{ type: "spring", stiffness: 200, damping: 25 }}
-        >
-          Play Video
-        </motion.h1>
-
-        {project.video && (
-          <motion.div
-            className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
-            variants={{ rest: { scale: 0.5, opacity: 0 }, hover: { scale: 1, opacity: 1 } }}
-            transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.05 }}
-          >
-            <div 
-              className="h-10 w-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 active:scale-95 transition-transform duration-200 border border-white/50"
-              onClick={(e) => {
-                e.stopPropagation();
-                if (project.video) setActiveVideo(project.video);
-              }}
-            >
-              <svg className="w-4 h-4 text-zinc-900 ml-0.5 fill-current" viewBox="0 0 24 24">
-                <path d="M5.25 5.653v12.694c0 .856.926 1.39 1.668.958l11.1-6.347a1.125 1.125 0 000-1.916L6.918 4.695c-.742-.432-1.668.102-1.668.958z" />
-              </svg>
-            </div>
-          </motion.div>
-        )}
 
         {/* Floating screenshot sitting directly at the bottom of the outer wrapper */}
         <motion.div

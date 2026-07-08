@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-const darkBannerImage = "/ChatGPT%20Image%20May%2022%2C%202026%2C%2012_49_39%20AM.jpg";
+const darkBannerImage = "bg-gradient-to-br from-zinc-900 via-zinc-800 to-black";
 
 interface SocialProfile {
   name: string;
@@ -23,57 +23,35 @@ interface SocialProfile {
 
 const socialProfiles: Record<string, SocialProfile> = {
   GitHub: {
-    name: "Ashutosh Singh",
-    handle: "Ashutoshx7",
-    avatar: "https://github.com/ashutoshx7.png",
-    bio: "20 • Artist / Engineer",
-    location: "Delhi, India (UTC +05:30)",
+    name: "Ishaan Goswami",
+    handle: "Ishaan2510",
+    avatar: "https://github.com/Ishaan2510.png",
+    bio: "Full-stack engineer • distributed systems & LLM orchestration",
+    location: "India (UTC +05:30)",
     stats: [
       { value: "138", label: "Repositories" },
       { value: "236", label: "Followers" },
     ],
   },
-  Twitter: {
-    name: "Ashutoshx7",
-    handle: "@Ashutosh_7x7",
-    avatar: "https://unavatar.io/twitter/Ashutosh_7x7",
+  Email: {
+    name: "Ishaan Goswami",
+    handle: "ishaangoswami735@gmail.com",
+    avatar: "https://github.com/Ishaan2510.png",
     banner: darkBannerImage,
-    bio: "Artist / Engineer 20 • Backed by Vercel • Building Draco",
-    location: "Delhi, India (UTC +05:30)",
-    stats: [
-      { value: "395", label: "Following" },
-      { value: "2,312", label: "Followers" },
-    ],
+    bio: "Reach out for collaborations, roles, or a quick chat.",
+    location: "India (UTC +05:30)",
+    stats: [],
   },
   LinkedIn: {
-    name: "Ashutosh Singh",
-    handle: "in/ashutosh-singh-855177329",
-    avatar: "https://github.com/ashutoshx7.png",
+    name: "Ishaan Goswami",
+    handle: "in/ishaan-goswami-io",
+    avatar: "https://github.com/Ishaan2510.png",
     banner: darkBannerImage,
-    bio: "20 • Artist / Engineer ||",
-    location: "Lucknow, Uttar Pradesh, India",
+    bio: "Full-stack engineer • distributed systems & LLM orchestration",
+    location: "India",
     stats: [
       { value: "195", label: "Connections" },
     ],
-  },
-  Medium: {
-    name: "Ashutosh Singh",
-    handle: "@ashutoshx7",
-    avatar: "https://github.com/ashutoshx7.png",
-    bio: "Writing about modern web engineering, pixel-perfect design systems, and frontend optimizations.",
-    location: "Delhi, India (UTC +05:30)",
-    stats: [
-      { value: "12", label: "Stories" },
-      { value: "85", label: "Followers" },
-    ],
-  },
-  Discord: {
-    name: "Ashutoshx7",
-    handle: "ashutoshsingh71",
-    avatar: "/discord-avatar.png",
-    bio: "Even if it's dark, keep moving forward.",
-    location: "",
-    stats: [],
   },
 };
 

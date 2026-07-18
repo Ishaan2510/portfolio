@@ -20,11 +20,7 @@ export const metadata: Metadata = {
   description:
     "Full-stack engineer building distributed systems, LLM orchestration, and production observability tooling.",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "256x256" },
-    ],
-    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
   openGraph: {
     title: "Ishaan Goswami",

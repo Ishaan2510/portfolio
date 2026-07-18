@@ -29,8 +29,8 @@ const socialProfiles: Record<string, SocialProfile> = {
     bio: "Full-stack engineer • distributed systems & LLM orchestration",
     location: "India (UTC +05:30)",
     stats: [
-      { value: "138", label: "Repositories" },
-      { value: "236", label: "Followers" },
+      { value: "22", label: "Repositories" },
+      { value: "45", label: "Followers" },
     ],
   },
   Email: {
@@ -50,7 +50,7 @@ const socialProfiles: Record<string, SocialProfile> = {
     bio: "Full-stack engineer • distributed systems & LLM orchestration",
     location: "India",
     stats: [
-      { value: "195", label: "Connections" },
+      { value: "1300", label: "Connections" },
     ],
   },
 };
